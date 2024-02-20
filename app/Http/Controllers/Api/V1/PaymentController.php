@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Contracts\Repositories\PaymentControllerInterface;
 use App\Facades\Response;
 use App\Http\Requests\StorePaymentRequest;
 use App\Models\Payment;
@@ -12,7 +13,7 @@ use App\Http\Resources\PaymentCollection;
 use App\Http\Resources\PaymentResource;
 use Illuminate\Support\Facades\DB;
 
-class PaymentController extends Controller
+class PaymentController extends Controller implements PaymentControllerInterface
 {
     public function __construct(
         public PaymentRepository $paymentRepository

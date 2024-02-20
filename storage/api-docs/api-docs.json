@@ -1,0 +1,94 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Accounting doc",
+        "description": "Accounting doc",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/": {},
+        "/api/v1/payments": {
+            "get": {
+                "tags": [
+                    "Payments"
+                ],
+                "summary": "Payments list",
+                "description": "Get payments list with details",
+                "operationId": "paymentsList",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "404": {
+                        "description": "Resource not found"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Payments"
+                ],
+                "summary": "ContactUs",
+                "description": "store payment",
+                "operationId": "storePayment",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "currency",
+                                    "amount",
+                                    "rate"
+                                ],
+                                "properties": {
+                                    "currency": {
+                                        "type": "text"
+                                    },
+                                    "amount": {
+                                        "type": "text"
+                                    },
+                                    "rate": {
+                                        "type": "text"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful operation"
+                    },
+                    "422": {
+                        "description": "Unprocessable Content"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1/currencies": {
+            "get": {
+                "tags": [
+                    "Currencies"
+                ],
+                "summary": "currencies list",
+                "description": "Get currencies list with details",
+                "operationId": "currenciesList",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "404": {
+                        "description": "Resource not found"
+                    }
+                }
+            }
+        }
+    }
+}
