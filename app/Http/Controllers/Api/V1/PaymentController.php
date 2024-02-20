@@ -9,6 +9,7 @@ use App\Repositories\PaymentRepository;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PaginateRequest;
 use App\Http\Resources\PaymentCollection;
+use Illuminate\Support\Facades\DB;
 
 class PaymentController extends Controller
 {
@@ -40,10 +41,17 @@ class PaymentController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the currencies list.
      */
-    public function show(Payment $payment)
+    public function currencies()
     {
-        //
+        $currencies = DB::table('payments')
+            ->select(DB::raw('currency, SUM(amount) as sum_amount, (SUM(amount_in_rate) / SUM(amount)) as avg_rate'))
+            ->groupBy('currency')
+            ->get();
+
+        return Response::message('currencies.messages.currency_list_found_successfully')
+            ->data($currencies)
+            ->send();
     }
 }
