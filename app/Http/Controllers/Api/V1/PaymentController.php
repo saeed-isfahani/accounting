@@ -7,19 +7,26 @@ use App\Http\Requests\StorePaymentRequest;
 use App\Models\Payment;
 use App\Repositories\PaymentRepository;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PaginateRequest;
+use App\Http\Resources\PaymentCollection;
 
 class PaymentController extends Controller
 {
     public function __construct(
         public PaymentRepository $paymentRepository
-    ){}
+    ) {
+    }
 
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(PaginateRequest $request)
     {
-        //
+        $payments = Payment::paginate($request->validated('per_page') ?? 5);
+
+        return Response::message('payments.messages.payment_list_found_successfully')
+            ->data(new PaymentCollection($payments))
+            ->send();
     }
 
     /**
