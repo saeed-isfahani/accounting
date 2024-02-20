@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::prefix('v1')->group(function () {
-    Route::post('payments', [PaymentController::class, 'store']);
-    Route::get('payments', [PaymentController::class, 'index']);
-    Route::get('currencies', [PaymentController::class, 'currencies']);
+    Route::post('payments', [PaymentController::class, 'store'])->name('payments.store');
+    Route::get('payments', [PaymentController::class, 'index'])->name('payments.list');
+    Route::get('currencies', [PaymentController::class, 'currencies'])->name('currencies.list');
 });

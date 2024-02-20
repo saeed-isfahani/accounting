@@ -9,6 +9,7 @@ use App\Repositories\PaymentRepository;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PaginateRequest;
 use App\Http\Resources\PaymentCollection;
+use App\Http\Resources\PaymentResource;
 use Illuminate\Support\Facades\DB;
 
 class PaymentController extends Controller
@@ -37,7 +38,7 @@ class PaymentController extends Controller
     {
         $payment = $this->paymentRepository->create($request->validated());
 
-        return Response::data(['payment' => $payment])->message('payments.messages.payment_saved_successfully')->send();
+        return Response::data(['payment' => new PaymentResource($payment)])->message('payments.messages.payment_saved_successfully')->send();
     }
 
     /**
