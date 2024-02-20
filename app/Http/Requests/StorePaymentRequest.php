@@ -11,7 +11,7 @@ class StorePaymentRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,8 +23,8 @@ class StorePaymentRequest extends FormRequest
     {
         return [
             'currency' => 'required|string',
-            'amount' => 'required|double',
-            'rate' => 'required|int'
+            'amount' => 'required|decimal:0,2',
+            'rate' => 'required|integer'
         ];
     }
 }

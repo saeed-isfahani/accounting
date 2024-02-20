@@ -9,6 +9,10 @@ class Payment extends Model
 {
     use HasFactory;
 
+    public $guarded = [
+        'id'
+    ];
+
     public $fillable = [
         'currency',
         'amount',
